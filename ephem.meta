@@ -1,0 +1,7 @@
+;;;; ephem.meta 
+((license "LGPL-3")
+ (category misc)
+ (needs fmt foreigners)
+ (test-depends test)
+ (author "Rob Altenburg")
+ (synopsis "Chicken scheme bindings to the libnova astrometry library"))

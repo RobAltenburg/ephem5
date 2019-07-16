@@ -1,0 +1,113 @@
+((author "Rob Altenburg")
+(synopsis "A wrapper for libnova a 'general purpose, double precision, Celestial Mechanics, Astrometry and Astrodynamics library.'")
+(category misc)
+(license "GPLv3")
+(components 
+    (extension ephem-common
+        (link-options -L -lnova))
+    (extension ephem-aberration
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-angular
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-apparent
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-atmospheric-refraction
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-comet
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-constellation
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-dynamical
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-earth
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+    (extension ephem-elliptic
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-heliocentric
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-hyperbolic
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-julian-day
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-jupiter
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-lunar
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-mars
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-mercury
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-neptune
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-nutation
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-parabolic
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-pluto
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-precession
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-proper-motion
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-refraction
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-rise-set
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-saturn
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-sidereal
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-solar
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-transform
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-uranus
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-utility
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem-venus
+        (component-dependencies ephem-common)
+        (link-options -L -lnova))
+(extension ephem
+        (component-dependencies ephem-common 
+             ephem-sidereal ephem-lunar ephem-solar ephem-rise-set ephem-julian-day
+             ephem-angular ephem-mercury ephem-venus ephem-mars ephem-jupiter ephem-saturn
+             ephem-neptune ephem-uranus ephem-pluto ephem-earth
+             ephem-refraction ephem-transform ephem-constellation 
+             ephem-aberration ephem-apparent ephem-comet ephem-dynamical
+             ephem-nutation ephem-elliptic ephem-heliocentric ephem-hyperbolic
+             ephem-parabolic ephem-precession ephem-proper-motion ephem-atmospheric-refraction
+             ephem-utility)
+        (link-options -L -lnova))
+))
+

@@ -1,0 +1,9 @@
+*.so
+*.import.scm
+*.inline
+*.types
+*.txt
+*.sh
+foo
+test
+
