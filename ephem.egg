@@ -3,6 +3,7 @@
 (category misc)
 (license "GPLv3")
 (dependencies foreigners)
+(test-dependencies test)
 (foreign-dependencies libnova)
 (components 
     (extension ephem-common
