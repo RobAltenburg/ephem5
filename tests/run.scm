@@ -1,12 +1,26 @@
-(use numbers srfi-19 ephem test)
+(import ephem test (chicken time posix))
 ; mayhill lnlat -105.5287 32.903
 ; harrisburg lnlat -76.8867 40.2732 
 ; b33 radec 5.683 -2.4583
 (current-test-epsilon 0.001)
-;(define dd (exact->inexact (date->julian-day (make-date 0 0 0 16 11 12 2016 0 #f))))
+
 (define dd 2457734.166670) 
 (define lng 0)
 (define lat 51.5)
+
+;; date access {{{1 
+(define (date-day d)
+  (vector-ref d 3))
+
+(define (date-hour d)
+  (vector-ref d 2))
+
+(define (date-minute d)
+  (vector-ref d 1))
+
+(define (date-second d)
+  (vector-ref d 0))
+;;}}}
 
 (test-group "sidereal" ;; {{{1
             (test "GMST" 21.386430 (gmst dd)) ;; should be 21.342292
@@ -28,17 +42,14 @@
             (test "sunrise day" 12 (date-day sunrise))
             (test "sunrise hours" 7 (date-hour sunrise))
             (test "sunrise minute" 55 (date-minute sunrise))
-            ;;(test "sunrise seconds" 41.9655 (+ (date-second sunrise) (/ (date-nanosecond sunrise) 1e+9)))
            (define sunset (get-date (rst-set rst)))
             (test "sunset day" 12 (date-day sunset))
             (test "sunset hours" 15 (date-hour sunset))
             (test "sunset minute" 49 (date-minute sunset))
-            ;;(test "sunset seconds" 57.6132 (+ (date-second sunset) (/ (date-nanosecond sunset) 1e+9)))
             (define transit (get-date (rst-transit rst)))
             (test "transit day" 12 (date-day transit))
             (test "transit hours" 11 (date-hour transit))
             (test "transit minute" 52 (date-minute transit))
-            ;;(test "transit seconds" 54.6300 (+ (date-second transit) (/ (date-nanosecond transit) 1e+9)))
             (define ll (solar-ecl-coords dd ))
             (test "ecl lng" 259.820349 (ecl-lng ll))
             (test "ecl lat" 0.002035 (ecl-lat ll))
@@ -53,17 +64,17 @@
             (test "moonrise day" 12 (date-day moonrise))
             (test "moonrise hours" 15 (date-hour moonrise))
             (test "moonrise minute" 13 (date-minute moonrise))
-            (test "moonrise seconds" 49.055840 (+ (date-second moonrise) (/ (date-nanosecond moonrise) 1e+9)))
+            (test "moonrise seconds" 49 (date-second moonrise))
            (define moonset (get-date (rst-set rst)))
             (test "moonset day" 12 (date-day moonset))
             (test "moonset hours" 5 (date-hour moonset))
             (test "moonset minute" 24 (date-minute moonset))
-            (test "moonset seconds" 13.533134 (+ (date-second moonset) (/ (date-nanosecond moonset) 1e+9)))
+            (test "moonset seconds" 13 (date-second moonset))
             (define transit (get-date (rst-transit rst)))
             (test "transit day" 11 (date-day transit))
             (test "transit hours" 21 (date-hour transit))
             (test "transit minute" 53 (date-minute transit))
-            (test "transit seconds" 2.081741 (+ (date-second transit) (/ (date-nanosecond transit) 1e+9)))
+            (test "transit seconds" 2 (date-second transit))
             (test "lunar-sdiam arcsec" 995.721697 (lunar-sdiam dd))
             (test "rise" 2457735.124596 (rst-rise rst))
             (test "set" 2457734.725157 (rst-set rst))

@@ -2,6 +2,8 @@
 (synopsis "A wrapper for libnova a 'general purpose, double precision, Celestial Mechanics, Astrometry and Astrodynamics library.'")
 (category misc)
 (license "GPLv3")
+(dependencies foreigners)
+(foreign-dependencies libnova)
 (components 
     (extension ephem-common
         (link-options -L -lnova))
