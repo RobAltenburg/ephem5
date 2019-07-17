@@ -1,9 +1,12 @@
-*.so
 *.import.scm
 *.inline
-*.types
-*.txt
+*.link
+*.log
+*.o
 *.sh
+*.so
+*.txt
+*.types
 foo
 test
-
+tests/run
