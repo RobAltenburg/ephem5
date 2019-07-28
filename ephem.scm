@@ -16,7 +16,8 @@
               lunar-geo-posn lunar-equ-coords-prec lunar-ecl-coords
               solar-rst-horizon solar-rst solar-geom-coords solar-equ-coords 
               solar-ecl-coords solar-geo-coords solar-sdiam
-              get-date get-date-string date->jd jd->seconds object-rst object-next-rst object-next-rst-horizon
+              get-julian-day get-julian-from-sys get-date-from-sys
+              get-date  object-rst object-next-rst object-next-rst-horizon
               body-rst-horizon body-next-rst-horizon  
               body-next-rst-horizon-future vsop87->fk5
               solve-kepler ell-mean-anomaly ell-true-anomaly ell-radius-vector
@@ -69,6 +70,9 @@
               ecl-from-rect equ-from-gal equ2000-from-gal gal-from-equ gal-from-equ2000
               ell-comet-mag par-comet-mag
               range-hours range-degrees range-degrees180
+              make-date  date-years date-months date-days date-hours date-minutes date-seconds
+              date-years-set! date-months-set! date-days-set! date-hours-set! 
+              date-minutes-set! date-seconds-set!
               make-rst rst-rise rst-set rst-transit 
               make-rect rect-x rect-y rect-z
               make-helio helio-l helio-b helio-r

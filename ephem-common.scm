@@ -10,7 +10,9 @@
 ;;; Module Definition {{{1
 (module ephem-common
         (range-hours range-degrees range-degrees180
-;;                     make-date date-years date-months date-days date-hours date-minutes date-seconds
+                     make-date date-years date-months date-days date-hours date-minutes date-seconds
+                     date-years-set! date-months-set! date-days-set!
+                     date-hours-set! date-minutes-set! date-seconds-set!
                      make-rst rst-rise rst-set rst-transit
                      make-rect rect-x rect-y rect-z
                      make-helio helio-l helio-b helio-r
@@ -52,27 +54,27 @@
             (else degrees)))
 
 
-;;        (define-foreign-record-type (date "struct ln_date")
-;;                                    (constructor: _make-date)
-;;                                    (destructor: free-date)
-;;                                    (int years date-years date-years-set!)
-;;                                    (int months date-months date-months-set!)
-;;                                    (int days date-days date-days-set!)
-;;                                    (int hours date-hours date-hours-set!)
-;;                                    (int minutes date-minutes date-minutes-set!)
-;;                                    (double seconds date-seconds date-seconds-set!))
-;;
-;;        (define (make-date #!optional (years #f) (months #f) (days #f) (hours #f) (minutes #f) (seconds #f))
-;;          (let ((date (_make-date)))
-;;            (when (and years months days hours minutes seconds)
-;;              (date-years-set! date years)
-;;              (date-months-set! date months)
-;;              (date-days-set! date days)
-;;              (date-hours-set! date hours)
-;;              (date-minutes-set! date minutes)
-;;              (date-seconds-set! date seconds))
-;;            (set-finalizer! date free-date)
-;;            date))
+        (define-foreign-record-type (date "struct ln_date")
+                                    (constructor: _make-date)
+                                    (destructor: free-date)
+                                    (int years date-years date-years-set!)
+                                    (int months date-months date-months-set!)
+                                    (int days date-days date-days-set!)
+                                    (int hours date-hours date-hours-set!)
+                                    (int minutes date-minutes date-minutes-set!)
+                                    (double seconds date-seconds date-seconds-set!))
+
+        (define (make-date #!optional (years #f) (months #f) (days #f) (hours #f) (minutes #f) (seconds #f))
+          (let ((date (_make-date)))
+            (when (and years months days hours minutes seconds)
+              (date-years-set! date years)
+              (date-months-set! date months)
+              (date-days-set! date days)
+              (date-hours-set! date hours)
+              (date-minutes-set! date minutes)
+              (date-seconds-set! date seconds))
+            (set-finalizer! date free-date)
+            date))
 
 
         (define-foreign-record-type (rst "struct ln_rst_time")

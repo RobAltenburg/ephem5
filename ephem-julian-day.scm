@@ -8,10 +8,11 @@
 
 ;;; Module Definition {{{1
 (module ephem-julian-day
-        (get-date
-          get-date-string
-          jd->seconds
-          date->jd)
+        ( get-julian-day
+          get-julian-from-sys
+          get-date-from-sys
+          get-date
+          )
 
         (import scheme
                 (chicken base) 
@@ -19,33 +20,33 @@
                 (chicken time posix)
                 ephem-common)
 
-        (define UNIX-EPOCH-JD 2440587.5)
+        (foreign-declare "#include <libnova/julian_day.h>")
+
         ;;; }}}
 
         ;;; Julian Day {{{1
-        (define (date->jd seconds minutes hours day month year #!optional (tz 0.0) (dstflag #f))
-          (let* ((my-date (list->vector
-                            (list seconds
-                                  minutes
-                                  hours
-                                  day
-                                  (- month 1)
-                                  (- year 1900) 
-                                  0
-                                  0 
-                                  dstflag
-                                  tz))))
-            (exact->inexact (+ UNIX-EPOCH-JD (/ (utc-time->seconds my-date) 86400)))))
+       (define (get-julian-day date)
+          ((foreign-lambda double "ln_get_julian_day"
+                          nonnull-c-pointer)
+            date))
 
+       (define (get-julian-from-sys)
+          ((foreign-lambda double "ln_get_julian_from_sys")))
 
-        (define (get-date jd)
-          (seconds->utc-time (jd->seconds jd)))
+         (define (get-date-from-sys)
+          (let ((date (make-date)))
+            ((foreign-lambda void "ln_get_date_from_sys"
+                             nonnull-c-pointer)
+             date)
+            date))
 
-        (define (get-date-string jd)
-          (time->string (seconds->utc-time (jd->seconds jd))))
+       (define (get-date jd)
+          (let ((date (make-date)))
+            ((foreign-lambda void "ln_get_date"
+                             double
+                             nonnull-c-pointer)
+             jd
+             date)
+            date))
 
-        (define (jd->seconds jd)
-          (inexact->exact (floor (* 86400 (- jd UNIX-EPOCH-JD)))))
-
-        )
-
+)
